@@ -1,7 +1,33 @@
 const express = require('express');
 const app = express();
+const axios = require('axios');
+const querystring = require('querystring'); //Built in node module to parse and stringify query strings
+const { error } = require('console');
+
+require('dotenv').config();
+
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const REDIRECT_URI = process.env.REDIRECT_URI;
 
 const port = 8888;
+const stateKey = 'spotify_auth_state'; 
+/**
+ * Generates a random string containing numbers and letters
+ * @param  {number} length The length of the string
+ * @return {string} The generated string
+ */
+// This func is to protect against cross-site request forgery
+const generateRandomString = length => {
+    let text = '';
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (let i = 0; i < length; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+  };
+
+/* ROUTES */
 
 app.get('/', (req,res) => {
     const data = {
@@ -10,6 +36,90 @@ app.get('/', (req,res) => {
       };
     
       res.json(data);
+});
+
+//Request auth to access data from spotify
+app.get('/login', (req,res) => {
+    const state = generateRandomString(16);
+    res.cookie(stateKey, state);
+
+    const scope = 'user-read-private user-read-email'; //list of spotify's pre-defined auth scopes.
+    const queryParams = querystring.stringify({
+        client_id: CLIENT_ID,
+        response_type: 'code',
+        redirect_uri: REDIRECT_URI,
+        state,
+        scope,
+    });
+
+    res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
+});
+
+//use Auth code to request access token, spotify confirms validity of auth code, then responds with access token and refresh token
+app.get('/callback', (req,res) => {
+    const code = req.query.code || null; //store the value of our authorization code which we got from the code query param in the code variable.
+
+    axios({
+        method: 'post',
+        url: 'https://accounts.spotify.com/api/token',
+        data: querystring.stringify({
+            grant_type: 'authorization_code',
+            code,
+            redirect_uri: REDIRECT_URI,
+        }),
+        headers:{
+            'content-type': 'application/x-www-form-urlencoded',
+            Authorization: `Basic ${new Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`,
+        },
+    })
+    .then(response => { //spotify web api confirms validity of access token, then responds with the requested data
+        if(response.status === 200){
+            const {access_token, token_type} = response.data;
+
+            axios.get('https://api.spotify.com/v1/me', {
+                headers:{
+                    Authorization: `${token_type} ${access_token}`
+                }
+            })
+            .then(response => {
+                res.send(`<pre>${JSON.stringify(response.data, null, 2)}</pre>`)
+            })
+            .catch(error => {
+                res.send(error);
+            });
+            
+        } else {
+            res.send(response);
+        }
+    })
+    .catch(error => {
+        res.send(error);
+    });
+});
+
+
+/* Route handler to handle requesting a new access token with our refresh token behind the scenes */
+app.get('/refresh_token', (req,res) => {
+    const {refresh_token} = req.query;
+
+    axios({
+        method: 'post',
+        url: 'https://accounts.spotify.com/api/token',
+        data: querystring.stringify({
+            grant_type: 'refresh_token',
+            refresh_token: refresh_token
+        }),
+        headers: {
+            'content-type': 'application/x-www-form-urlencoded',
+            Authorization: `Basic ${new Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`,
+        },
+    })
+    .then(response => {
+        res.send(response.data);
+    })
+    .catch(error => {
+        res.send(error);
+    });
 });
 
 app.get('/awesome-generator', (req, res) => {

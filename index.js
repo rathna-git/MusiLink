@@ -74,7 +74,7 @@ app.get('/callback', (req,res) => {
     })
     .then(response => { //spotify web api confirms validity of access token, then responds with the requested data
         if(response.status === 200){
-            const {access_token, refresh_token} = response.data;
+            const {access_token, refresh_token, expires_in} = response.data;
 
             const queryParams = querystring.stringify({
                 access_token,

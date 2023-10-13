@@ -16,6 +16,7 @@ const LOCALSTORAGE_VALUES = {
     timestamp: window.localStorage.getItem(LOCALSTORAGE_KEYS.timestamp),
 }
 
+
 /**
  * Clear out all localStorage items we've set and reload the page
  * @returns {void}
@@ -28,7 +29,6 @@ export const logout = () => {
     //Navigate to homepage
     window.location = window.location.origin;
 };
-
 
 
 /**
@@ -126,6 +126,9 @@ const hasTokenExpired = () => {
  *  */ 
 
 export const accessToken = getAccessToken();
+
+
+
 
 /**
  * Axios global request headers

@@ -83,7 +83,7 @@ app.get('/callback', (req,res) => {
             });
             res.redirect(`http://localhost:3000/?${queryParams}`); //redirects to localhost:3000
         } else {
-            res.redirect(`/?{querystring.stringify({error: 'invalid_token'})}`);
+            res.redirect(`/?${querystring.stringify({error: 'invalid_token'})}`);
         }
     })
     .catch(error => {

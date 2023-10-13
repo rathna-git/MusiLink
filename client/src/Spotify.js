@@ -17,6 +17,21 @@ const LOCALSTORAGE_VALUES = {
 }
 
 /**
+ * Clear out all localStorage items we've set and reload the page
+ * @returns {void}
+ */
+export const logout = () => {
+    //Clear all localStorage items
+    for(const prop in LOCALSTORAGE_KEYS){
+        window.localStorage.removeItem(LOCALSTORAGE_KEYS[prop]);
+    }
+    //Navigate to homepage
+    window.location = window.location.origin;
+};
+
+
+
+/**
  * Use the refresh token in localStorage to hit tthe /refresh_token endpoint
  * in our Node app, then update values in localStorage with the data from response
  *  @returns {void}

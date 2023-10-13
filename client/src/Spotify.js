@@ -125,6 +125,8 @@ const hasTokenExpired = () => {
  * We don't want our app trying to use 'undefined' as a valid Spotify access token!
  *  */ 
 
+export const accessToken = getAccessToken();
+
 /**
  * Axios global request headers
  * https://github.com/axios/axios#global-axios-defaults
@@ -139,5 +141,3 @@ axios.defaults.headers['Content-Type'] = 'application/json';
  * @returns {Promise}
  */
 export const getCurrentUserProfile = () => axios.get('/me');
-
-export const accessToken = getAccessToken();

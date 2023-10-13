@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { accessToken } from './Spotify';
+import { accessToken, logout } from './Spotify';
 
 import './App.css';
 
@@ -20,7 +20,10 @@ function App() {
             Log in to Spotify
           </a>
         ): (
-          <h1>Logged in!</h1>
+          <>
+            <h1>Logged in!</h1>
+            <button onClick={logout}>Log Out</button>
+          </>
         )}
 
       </header>

@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// *********************** TOKENS ********************************
 //Map for localStorage keys
 const LOCALSTORAGE_KEYS = {
     accessToken: 'spotify_access_token',
@@ -26,6 +27,8 @@ export const logout = () => {
     for(const prop in LOCALSTORAGE_KEYS){
         window.localStorage.removeItem(LOCALSTORAGE_KEYS[prop]);
     }
+    // Remove the Authorization header from the axios defaults.
+    delete axios.defaults.headers.common.Authorization;
     //Navigate to homepage
     window.location = window.location.origin;
 };
@@ -128,7 +131,7 @@ const hasTokenExpired = () => {
 export const accessToken = getAccessToken();
 
 
-
+//***************************************** API CALLS **************************************/
 
 /**
  * Axios global request headers

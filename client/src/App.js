@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Route, Routes, useLocation} from 'react-router-dom';
 
 import { accessToken, logout } from './Spotify';
-import {Login, Profile} from './pages';
+import {Login, Profile, TopArtists} from './pages';
 import { GlobalStyle } from './styles';
 import styled from 'styled-components/macro';
 
@@ -56,7 +56,7 @@ function App() {
           <Router>
             <ScrollToTop />
              <Routes>
-                <Route path='/top-artists' element={<h1>Top Artists</h1>}></Route>
+                <Route path='/top-artists' element={<TopArtists />}></Route>
                 <Route path='/top-tracks' element={<h1>Top Tracks</h1>}></Route>
                 <Route path='/playlists/:id' element={<h1>Playlist</h1>}></Route>
                 <Route path='/playlists' element= {<h1>Playlists</h1>}></Route>

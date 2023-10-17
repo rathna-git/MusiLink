@@ -74,8 +74,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   img {
-    width: 20%;
-    max-width: 20%;
+    width: 100%; 
+    max-width: 100%;
     vertical-align: middle;
   }
 

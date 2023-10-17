@@ -1,8 +1,8 @@
 import React from "react";
 
 import { catchErrors } from "../utils";
-import { SectionWrapper, ArtistsGrid } from "../components";
-import { getCurrentUserPlaylists, getCurrentUserProfile, getTopArtists } from "../Spotify";
+import { SectionWrapper, ArtistsGrid, TrackList, PlaylistsGrid } from "../components";
+import { getCurrentUserPlaylists, getCurrentUserProfile, getTopArtists, getTopTracks } from "../Spotify";
 import { StyledHeader } from "../styles";
 
 
@@ -12,6 +12,7 @@ function Profile() {
  const [profile, setProfile] = React.useState(null);
  const [playlists, setPlaylists] = React.useState(null);
  const [topArtists, setTopArtists] = React.useState(null);
+ const [topTracks, setTopTracks] = React.useState(null);
 
  React.useEffect(() => {
     async function fetchData() {
@@ -22,12 +23,16 @@ function Profile() {
         setPlaylists(userPlaylists.data);
 
         const userTopArtist = await getTopArtists();
-        setTopArtists(userTopArtist.data)
+        setTopArtists(userTopArtist.data);
+
+        const userTopTracks = await getTopTracks();
+        setTopTracks(userTopTracks.data);
     };
+
     catchErrors(fetchData());
  }, []);
 
- console.log(topArtists);
+ console.log(topTracks);
 
  return (
     <>
@@ -53,10 +58,18 @@ function Profile() {
                 </div>
             </StyledHeader>  
 
-            {topArtists && (
+            {topArtists &&  topTracks && (
                 <main>
                     <SectionWrapper title="Top artists this month" seeAllLink="/top-artists">
                         <ArtistsGrid artists={topArtists.items.slice(0, 10)} />
+                    </SectionWrapper>
+
+                    <SectionWrapper title="Top tracks this month" seeAllLink="/top-tracks">
+                        <TrackList tracks={topTracks.items.slice(0, 10)} />
+                    </SectionWrapper>
+
+                    <SectionWrapper title="Playlists" seeAllLink="/playlists">
+                        <PlaylistsGrid playlists={playlists.items.slice(0,10)}/>
                     </SectionWrapper>
                 </main>
             )} 

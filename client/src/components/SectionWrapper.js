@@ -22,7 +22,7 @@ const SectionWrapper = ({ children, title, seeAllLink, breadcrumb }) => (
           )}
         </h2>
         {seeAllLink && (
-          <Link to={seeAllLink} className="section__see-all">See All</Link>
+          <Link to={seeAllLink} className="section__see-all">Show all</Link>
         )}
       </div>
 

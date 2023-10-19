@@ -1,7 +1,7 @@
 import React from 'react';
 import { getTopArtists } from '../Spotify';
 import { catchErrors } from '../utils';
-import { ArtistsGrid, SectionWrapper, TimeRangeButtons } from '../components';
+import { ArtistsGrid, SectionWrapper, TimeRangeButtons, Loader } from '../components';
 
 function TopArtists(){
 
@@ -24,8 +24,10 @@ function TopArtists(){
                     activeRange={activeRange}
                     setActiveRange={setActiveRange}
                 />
-                {topArtists && topArtists.items && (
+                {topArtists && topArtists.items ? (
                     <ArtistsGrid artists ={topArtists.items} />
+                ) : (
+                    <Loader />
                 )}
             </SectionWrapper>
         </main>

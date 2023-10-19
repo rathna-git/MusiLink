@@ -36,15 +36,6 @@ const generateRandomString = length => {
 
 /* ROUTES */
 
-app.get('/', (req,res) => {
-    const data = {
-        name: 'Rathna',
-        isAwesome: true
-      };
-    
-      res.json(data);
-});
-
 //Request auth to access data from spotify
 app.get('/login', (req,res) => {
     const state = generateRandomString(16);
@@ -88,7 +79,7 @@ app.get('/callback', (req,res) => {
                 refresh_token,
                 expires_in,
             });
-            res.redirect(`${FRONTEND_URI}/?${queryParams}`); //redirects to localhost:3000
+            res.redirect(`${FRONTEND_URI}/?${queryParams}`); 
         } else {
             res.redirect(`/?${querystring.stringify({error: 'invalid_token'})}`);
         }
@@ -123,10 +114,6 @@ app.get('/refresh_token', (req,res) => {
     });
 });
 
-app.get('/awesome-generator', (req, res) => {
-    const { name, isAwesome } = req.query;
-    res.send(`${name} is ${JSON.parse(isAwesome) ? 'really' : 'not'} awesome`);
-  });
 
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', (req, res) => {

@@ -30,7 +30,7 @@ const StyledLoginButton = styled.a`
 
 const LOGIN_URI = process.env.NODE_ENV !== 'production' 
                     ? 'http://localhost:8888/login'
-                    : 'https://musilik.herokuapp.com/login';
+                    : ' https://musilink-a8e61c582d6a.herokuapp.com/login';
                     
 const Login = () => (
   <StyledLoginContainer>

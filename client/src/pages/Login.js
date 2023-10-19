@@ -28,10 +28,14 @@ const StyledLoginButton = styled.a`
   }
 `;
 
+const LOGIN_URI = process.env.NODE_ENV !== 'production' 
+                    ? 'http://localhost:8888/login'
+                    : 'https://musilik.herokuapp.com/login';
+                    
 const Login = () => (
   <StyledLoginContainer>
     <h1>MUSILINK</h1>
-    <StyledLoginButton href="http://localhost:8888/login">
+    <StyledLoginButton href={LOGIN_URI}>
       LOG IN TO SPOTIFY
     </StyledLoginButton>
   </StyledLoginContainer>

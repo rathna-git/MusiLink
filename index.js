@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 const axios = require('axios');
 const querystring = require('querystring'); //Built in node module to parse and stringify query strings
@@ -9,9 +10,15 @@ require('dotenv').config();
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
+const FRONTEND_URI = process.env.FRONTEND_URI;
 
-const port = 8888;
+const PORT = process.env.PORT || 8888;
 const stateKey = 'spotify_auth_state'; 
+
+
+// Priority serve any static files.
+app.use(express.static(path.resolve(__dirname, './client/build')));
+
 /**
  * Generates a random string containing numbers and letters
  * @param  {number} length The length of the string
@@ -81,7 +88,7 @@ app.get('/callback', (req,res) => {
                 refresh_token,
                 expires_in,
             });
-            res.redirect(`http://localhost:3000/?${queryParams}`); //redirects to localhost:3000
+            res.redirect(`${FRONTEND_URI}/?${queryParams}`); //redirects to localhost:3000
         } else {
             res.redirect(`/?${querystring.stringify({error: 'invalid_token'})}`);
         }
@@ -121,6 +128,11 @@ app.get('/awesome-generator', (req, res) => {
     res.send(`${name} is ${JSON.parse(isAwesome) ? 'really' : 'not'} awesome`);
   });
 
-app.listen(port, () => {
-    console.log(`Express app listening at http://localhost:${port}`);
+// All remaining requests return the React app, so it can handle routing.
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
+  });
+
+app.listen(PORT, () => {
+    console.log(`Express app listening at http://localhost:${PORT}`);
 });

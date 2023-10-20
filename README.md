@@ -7,5 +7,6 @@ A web app for visualizing personalized Spotify data. View your top artists, top 
 ### Frontend: 
 JavaScript, React with Hooks, Styled Components
 ### Backend: 
-Nodejs, Express
+Nodejs, Express.
+
 Deployed @ Heroku

@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const axios = require('axios');
-const querystring = require('querystring'); //Built in node module to parse and stringify query strings
+const querystring = require('query-string'); //Built in node module to parse and stringify query strings
 const { error } = require('console');
 
 require('dotenv').config();

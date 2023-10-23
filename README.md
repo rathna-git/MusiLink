@@ -36,7 +36,7 @@ https://github.com/rathna-git/MusiLink/assets/16769143/955f8095-32c6-4ced-a81b-f
 
 ### Top Tracks Page
 
-Displays the top artists the user listened to this month and in the last 6 months and all time.
+Displays the top tracks the user listened to this month and in the last 6 months and all time.
 
 https://github.com/rathna-git/MusiLink/assets/16769143/05f8a44d-e7fe-4a31-a56f-f91417ae0365
 

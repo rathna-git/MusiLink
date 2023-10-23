@@ -1,8 +1,6 @@
 # MusiLink
-<div>
-  <p>A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.</p>
-</div>
 
+A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.
 
 ## TECH STACK
 
@@ -14,5 +12,20 @@ Nodejs, Express.
 Deployed @ Heroku
 
 ## Demo
-<video src='./client/public/Login.mov' width=180/>
+
+### Login and Profile Page
+
+User login page using Spotify OAuth. On successful login it then displays the user's profile page.
+
+https://github.com/rathna-git/MusiLink/assets/16769143/571b7dff-ba66-4044-94c0-620fd63b03f3
+
+
+
+### Top Artists Page 
+
+Displays the top artists the user listened to this month and in the last 6 months and all time.
+
+https://github.com/rathna-git/MusiLink/assets/16769143/955f8095-32c6-4ced-a81b-fc84ab5b0382
+
+
 

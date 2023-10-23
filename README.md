@@ -1,5 +1,6 @@
-
-![og](https://github.com/rathna-git/MusiLink/assets/16769143/a4429880-02a2-4d82-b52e-004b30b20e9f)
+<p align="center"> 
+ <img src = "https://github.com/rathna-git/MusiLink/assets/16769143/5539fcf7-cef0-4084-bd8c-d221a2ea64c0">
+</p>
 
 # MusiLink
 

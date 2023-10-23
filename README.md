@@ -40,7 +40,13 @@ Display user's playlists and tracks in that playlist. User can sort the tracks b
 
 https://github.com/rathna-git/MusiLink/assets/16769143/d1922939-67aa-45f2-983e-f552fe017b83
 
+## Credits
 
+Inspired by Spotify Profile page.
+
+## License
+
+Musilink is developed under the [MIT license]
 
 
 

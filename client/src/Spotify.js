@@ -210,3 +210,15 @@ export const getTrackAudioAnalysis = trackId =>
  */
 export const getTrack = trackId =>
   axios.get(`/tracks/${trackId}`);
+
+
+export const getTrackInfo = trackId =>
+  axios
+    .all([getTrack(trackId), getTrackAudioAnalysis(trackId), getAudioFeaturesForTracks(trackId)])
+    .then(
+      axios.spread((track, audioAnalysis, audioFeatures) => ({
+        track: track.data,
+        audioAnalysis: audioAnalysis.data,
+        audioFeatures: audioFeatures.data,
+      })),
+);

@@ -203,3 +203,10 @@ export const getAudioFeaturesForTracks = ids => {
  */
 export const getTrackAudioAnalysis = trackId =>
   axios.get(`/audio-analysis/${trackId}`);
+
+/**
+ * Get a Track
+ * https://developer.spotify.com/documentation/web-api/reference/tracks/get-track/
+ */
+export const getTrack = trackId =>
+  axios.get(`/tracks/${trackId}`);

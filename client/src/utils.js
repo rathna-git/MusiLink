@@ -23,3 +23,6 @@ export const catchErrors = fn => {
         });
     }
 }
+
+// Get year from YYYY-MM-DD
+export const getYear = date => date.split('-')[0];

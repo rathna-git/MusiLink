@@ -196,3 +196,10 @@ export const getPlaylistById = playlist_id => {
 export const getAudioFeaturesForTracks = ids => {
     return axios.get(`/audio-features?ids=${ids}`);
 };
+
+/**
+ * Get Audio Analysis for a Track
+ * https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-analysis/
+ */
+export const getTrackAudioAnalysis = trackId =>
+  axios.get(`/audio-analysis/${trackId}`);

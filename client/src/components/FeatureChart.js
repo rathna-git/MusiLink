@@ -141,6 +141,11 @@ const FeatureChart = props => {
             <canvas id="chart" width="400" height="400" />
       </Container>
     )
-}
+};
+
+FeatureChart.propTypes = {
+    features: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
+    type: PropTypes.string,
+  };
 
 export default FeatureChart;

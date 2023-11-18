@@ -139,22 +139,57 @@ const Track = (props) => {
     {track ? (
         <Main>
             <TrackContainer>
-                <Artwork>
-                    <img src={track.album.images[0].url} alt="Album Artwork" />
-                </Artwork>
-                <Info>
-              <Title>{track.name}</Title>
-              <ArtistName>
-                {track.artists &&
-                  track.artists.map(({ name }, i) => (
-                    <span key={i}>
-                      {name}
-                      {track.artists.length > 0 && i === track.artists.length - 1 ? '' : ','}
-                      &nbsp;
-                    </span>
-                  ))}
-              </ArtistName>
+              <Artwork>
+                  <img src={track.album.images[0].url} alt="Album Artwork" />
+              </Artwork>
+              <Info>
+                <Title>{track.name}</Title>
+                <ArtistName>
+                  {track.artists &&
+                    track.artists.map(({ name }, i) => (
+                      <span key={i}>
+                        {name}
+                        {track.artists.length > 0 && i === track.artists.length - 1 ? '' : ','}
+                        &nbsp;
+                      </span>
+                    ))}
+                </ArtistName>
+                <Album>
+                  <a
+                    href={track.album.external_urls.spotify}
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    {track.album.name}
+                  </a>{' '}
+                  &middot; {getYear(track.album.release_date)}
+                </Album>
+                <PlayTrackButton
+                  href={track.external_urls.spotify}
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  Play on Spotify
+                </PlayTrackButton>
+              </Info>
             </TrackContainer>
+
+            {audioFeatures && audioAnalysis && (
+              <AudioFeatures>
+                <Features>
+                  <FeatureText></FeatureText>
+                  <FeatureLabel></FeatureLabel>
+                </Features>
+
+                <FeatureChart features={audioFeatures} type="" />
+
+                <DescriptionLink
+                  href=""
+                  target = "_blank"
+                  rel="noopener noreferrer"
+                >
+                  Full Description of Audio Features
+                </DescriptionLink>
+              </AudioFeatures>
+            )}
         </Main>
     ) : <Loader/>}
     </>

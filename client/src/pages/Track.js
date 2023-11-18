@@ -142,6 +142,18 @@ const Track = (props) => {
                 <Artwork>
                     <img src={track.album.images[0].url} alt="Album Artwork" />
                 </Artwork>
+                <Info>
+              <Title>{track.name}</Title>
+              <ArtistName>
+                {track.artists &&
+                  track.artists.map(({ name }, i) => (
+                    <span key={i}>
+                      {name}
+                      {track.artists.length > 0 && i === track.artists.length - 1 ? '' : ','}
+                      &nbsp;
+                    </span>
+                  ))}
+              </ArtistName>
             </TrackContainer>
         </Main>
     ) : <Loader/>}

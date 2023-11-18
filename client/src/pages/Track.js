@@ -182,7 +182,7 @@ const Track = (props) => {
                 <FeatureChart features={audioFeatures} type="" />
 
                 <DescriptionLink
-                  href=""
+                  href="https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/"
                   target = "_blank"
                   rel="noopener noreferrer"
                 >
